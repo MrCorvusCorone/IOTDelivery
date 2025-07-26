@@ -1,0 +1,19 @@
+header{
+    background: transparent;
+    background-color: rgba(200, 200, 200, 0.7);
+}
+
+section#hero .carousel-item{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100vh;
+    height: 100vh;
+}
+
+section#hero .carousel-caption{
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 20px;
+}
