@@ -32,7 +32,8 @@ class UserSeeder extends Seeder
             'alm_kota_domisili' => '0',
             'alm_kec_domisili'  => '0',
             'alm_kel_domisili'  => '0',
-            'user_role_id'      => 1 // user role: admin
+            'user_role_id'      => 1, // user role: admin
+            'photo'             => ''
         ]);// Admin -- Teguh Wijoseno -- end
 
         // User -- Anastasia Kosasih --start
@@ -54,7 +55,8 @@ class UserSeeder extends Seeder
             'alm_kota_domisili' => '0',
             'alm_kec_domisili'  => '0',
             'alm_kel_domisili'  => '0',
-            'user_role_id'      => 2 // user role: user
+            'user_role_id'      => 2, // user role: user,
+            'photo'             => ''
         ]);// User -- Anastasia Kosasih --end
     }
 }

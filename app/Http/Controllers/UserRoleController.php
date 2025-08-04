@@ -90,6 +90,12 @@ class UserRoleController extends Controller
         // Ambil data dari table user_roles
         $data['roles'] = UserRole::where('enable_status', true)->get();
 
+        // Data untuk breadcrumb (components.dashboard.breadcrumb.blade.php)
+        $data['heading']    = 'User Role List';
+        $data['group']      = 'Settings and Configs';
+        $data['menu']       = 'Users Setting';
+        $data['submenu']    = 'Users Role';
+
         // Arahkan ke view usersroles.index.php 
         return view('settings.usersroles.index', ['data' => $data]);
     }

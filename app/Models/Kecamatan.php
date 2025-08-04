@@ -37,4 +37,9 @@ class Kecamatan extends Model
         return $this->hasMany(Kelurahan::class);
     }
 
+    // Relasi dengan table users melaui model User
+    public function user(){
+        return $this->hasMany(User::class);
+    }
+
 }

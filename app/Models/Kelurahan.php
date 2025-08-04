@@ -32,4 +32,8 @@ class Kelurahan extends Model
         return $this->belongsTo(Kecamatan::class);
     }
 
+    // Relasi dengan table users melaui model User
+    public function user(){
+        return $this->hasMany(User::class);
+    }
 }

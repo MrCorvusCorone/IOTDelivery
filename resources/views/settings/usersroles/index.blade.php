@@ -48,12 +48,14 @@
                                             <td>{{ $user->user_name }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->telp }}</td>
-                                            <td>{{ $user->role_name }}</td>
-                                            <td class="text-center">
-                                                <a href="" class="btn btn-outline-primary btn-sm me-1 btnInfo" data-bs-toggle="modal" data-bs-target="#view_role" data-roleinfo="{{ $user->role_desc }}" data-rolename="{{ $user->role_name }}">
-                                                    <i class="fa-solid fa-eye"></i>
+                                            <td>
+                                                <a href="" class="btnInfo" data-bs-toggle="modal" data-bs-target="#view_role" data-roleinfo="{{ $user->role_desc }}" data-rolename="{{ $user->role_name }}" title="View detail">
+                                                    <i class="fa-solid fa-eye me-1"></i>
+                                                    {{ $user->role_name }}
                                                 </a>
-                                                <button type="button" class="btn btn-outline-warning btn-sm btnEdit" data-bs-toggle="modal" data-bs-target="#edit_userrole" data-userid="{{ $user->user_id }}">
+                                            </td>
+                                            <td class="text-center">
+                                                <button type="button" class="btn btn-outline-warning btn-sm btnEdit" data-bs-toggle="modal" data-bs-target="#edit_userrole" data-userid="{{ $user->user_id }}" title="Edit role">
                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                 </button>
                                             </td>
@@ -97,11 +99,12 @@
                 </div>
                 <div class="modal-body">
                     <form action="" method="post" id="formEditRole">
-                        @method('patch')
+                        @method('put')
                         @csrf
                         <div class="mb-5 px-3">
                             <label for="user_role" class="form-label fw-bold">Pilih User Role:</label>
                             <select class="form-select" id="user_role" name="user_role">
+                                {{-- <option value="">Pilih Role</option> --}}
                                 @foreach ($data['roles'] as $role)
                                     <option value="{{ $role->id }}" type="number">{{ $role->name }}</option>
                                 @endforeach
@@ -172,7 +175,11 @@
 
                     // Manipulasi attribut elemen html dengan id="send_data"
                     $('#formEditRole').attr('action', '/usersrole/' + user_id + '/edit');
+                    
                 });
+
+                // Manipulasi attribut elemen html dengan id="send_data" tanpa merubah elemen select dengan id=formEditRole
+                $('#formEditRole').attr('action', '/usersrole/' + user_id + '/edit');
             });
 
         });

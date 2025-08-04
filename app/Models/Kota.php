@@ -36,4 +36,9 @@ class Kota extends Model
     public function kecamatan(){
         return $this->hasMany(Kecamatan::class);
     }
+
+    // Relasi dengan table users melaui model User
+    public function user(){
+        return $this->hasMany(User::class);
+    }
 }

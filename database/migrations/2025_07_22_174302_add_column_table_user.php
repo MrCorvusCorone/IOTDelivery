@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('date_lahir')->nullable();
             $table->string('kota_lahir')->nullable();
             $table->string('telepon')->nullable();
+            $table->string('photo')->nullable();
 
             $table->string('alm_jln_asal')->nullable();
             $table->string('alm_jln_domisili')->nullable();

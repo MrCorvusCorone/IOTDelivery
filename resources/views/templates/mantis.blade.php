@@ -97,16 +97,7 @@
                         <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
                       </a>
                       <ul class="pc-submenu">
-                          {{-- <li class="pc-item"><a class="pc-link" href="#!">Level 2.1</a></li> --}}
-                          <li class="pc-item pc-hasmenu">
-                            <a href="#!" class="pc-link">Users List<span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
-                            <ul class="pc-submenu">
-                                <li class="pc-item"><a class="pc-link" href="#!">View List</a></li>
-                                <li class="pc-item"><a class="pc-link" href="#!">Add User</a></li>
-                                <li class="pc-item"><a class="pc-link" href="#!">Edit User</a></li>
-                                <li class="pc-item"><a class="pc-link" href="#!">Delete User</a></li>
-                            </ul>
-                          </li>
+                          <li class="pc-item"><a class="pc-link" href="{{ route('userslist') }}">Users List</a></li>
                           @if (Auth::user()->user_role_id == 1)
                             <li class="pc-item"><a class="pc-link" href="/usersrole">Users Role</a></li>
                           @endif
@@ -315,6 +306,8 @@
     <script src="{{ asset('assets/templates/Mantis-Bootstrap-1.0.0/js/fonts/custom-font.js') }}"></script>
     <script src="{{ asset('assets/templates/Mantis-Bootstrap-1.0.0/js/pcoded.js') }}"></script>
     <script src="{{ asset('assets/templates/Mantis-Bootstrap-1.0.0/js/plugins/feather.min.js') }}"></script>
+
+    @yield('footerLibrary')
 
     <script>layout_change('light');</script>
       

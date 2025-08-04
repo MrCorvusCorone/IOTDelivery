@@ -37,7 +37,8 @@ class User extends Authenticatable
         'alm_kota_domisili',
         'alm_kec_domisili',
         'alm_kel_domisili',
-        'user_role_id' 
+        'user_role_id',
+        'photo' 
     ];
 
     // Attribute yang memiliki nilai default
@@ -69,7 +70,7 @@ class User extends Authenticatable
     }
 
     // Relasi(invers) dengan table provinsi melalui model Provinsi
-    public function provinsi(){
+    public function provinsi_asal(){
         return $this->belongsTo(Provinsi::class);
     }
 
