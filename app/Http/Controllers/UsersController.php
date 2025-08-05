@@ -125,35 +125,51 @@ class UsersController extends Controller
             'telepon'           => ['required', 'starts_with:+'],
             'date_lahir'        => ['required', 'date'],
             'kota_lahir'        => ['required'],
-            'alm_prov_asal'     => ['required'],
-            'alm_kota_asal'     => ['required'],
-            'alm_kec_asal'      => ['required'],
-            'alm_kel_asal'      => ['required'],
-            'alm_jl_asal'       => ['required'],
-            'alm_prov_domisili' => ['required'],
-            'alm_kota_domisili' => ['required'],
-            'alm_kec_domisili'  => ['required'],
-            'alm_kel_domisili'  => ['required'],
-            'alm_jl_domisili'   => ['required'],
-            'photo'             => ['nullable','mimes:jpeg,png,jpg','max:3072'] // dalam satuan kB (1 MB = 1024 kB)
+            'alm_prov_asal'     => ['nullable'],
+            'alm_kota_asal'     => ['nullable'],
+            'alm_kec_asal'      => ['nullable'],
+            'alm_kel_asal'      => ['nullable'],
+            'alm_jl_asal'       => ['nullable'],
+            'alm_prov_domisili' => ['nullable'],
+            'alm_kota_domisili' => ['nullable'],
+            'alm_kec_domisili'  => ['nullable'],
+            'alm_kel_domisili'  => ['nullable'],
+            'alm_jl_domisili'   => ['nullable'],
+            'photo'             => ['nullable','mimes:jpeg,png,jpg','max:2048'] // dalam satuan kB (1 MB = 1024 kB)
         ]);
-
-        // Hapus photo profil sebelumnya jika ada
-        if ($user->photo != '') {
-            Storage::disk('public')->delete('usersdata/'.$user->email.'/images/'.$user->photo);
-
-        }
 
         // Simpan value dari request file 
         $photo = $request->file('photo'); 
 
-        // Membuat nama photo dengan menggabung uuid dan ekstensi imagenya
-        $photoName = Str::uuid().'.'.$photo->getClientOriginalExtension(); 
+        // Jika terdapat file foto terlampir 
+        if ($photo != null) {
 
-        // Proses simpan file image sesuai email user
-        Storage::disk('public')->putFileAs('usersdata/'.$request['email'].'/images', $photo, $photoName); 
+            // Hapus photo profil sebelumnya jika ada
+            if ($user->photo != '') {
+                Storage::disk('public')->delete('usersdata/'.$user->email.'/images/'.$user->photo);
+            }
 
-        $validatedData['photo'] = $photoName;
+            // Membuat nama photo dengan menggabung uuid dan ekstensi imagenya
+            $photoName = Str::uuid().'.'.$photo->getClientOriginalExtension(); 
+
+            // Proses simpan file image sesuai email user
+            Storage::disk('public')->putFileAs('usersdata/'.$request['email'].'/images', $photo, $photoName); 
+
+            $validatedData['photo'] = $photoName;
+
+            // Membuat nama photo dengan menggabung uuid dan ekstensi imagenya
+            $photoName = Str::uuid().'.'.$photo->getClientOriginalExtension(); 
+
+            // Proses simpan file image sesuai email user
+            Storage::disk('public')->putFileAs('usersdata/'.$request['email'].'/images', $photo, $photoName); 
+
+            $validatedData['photo'] = $photoName;
+        
+        } else{
+            
+            $validatedData['photo'] = $user->photo;
+
+        }
 
         // Proses input data ke table users
         User::where('id', $user->id)->update([

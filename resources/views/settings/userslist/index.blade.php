@@ -14,20 +14,27 @@
 @section('mainContent')
     <div class="pc-container">
         <div class="pc-content">
-            <!-- [ breadcrumb ] start -->
+            {{-- Breadcrumb -- start --}}
             <x-dashboard.breadcrumb group="{{ $data['group'] }}" heading="{{ $data['heading'] }}" menu="{{ $data['menu'] }}" submenu="{{ $data['submenu'] }}"></x-dashboard.breadcrumb>
-            <!-- [ breadcrumb ] end -->
+            {{-- Breadcrumb -- end --}}
         
-            <!-- [ Main Content ] start -->
+            {{-- Main Content -- start --}}
             <div class="row">
-                <!-- [ List ] start -->
+                {{-- List -- start --}}
                 <div class="col-md-12 col-xl-12">
                     <div class="d-flex align-items-center justify-content-between mb-3">
                         <h5 class="mb-0">Table Users</h5>
+                        <ul class="nav nav-pills justify-content-end mb-0" id="chart-tab-tab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="alm-asal-tab" data-bs-toggle="pill" data-bs-target="#alm-asal" type="button" role="tab" aria-controls="alm-asal" aria-selected="true">
+                                    Asal
+                                </button>
+                            </li>
+                        </ul>
                     </div>
                     <div class="card">
                         <div class="card-body">
-                        {{-- Datatable --}}
+                        {{-- Datatable -- start --}}
                             <table id="tableUserList" class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
@@ -58,24 +65,22 @@
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->telepon }}</td>
                                             <td>
-                                                @if($user->alm_jln_domisili != '0')
+                                                @if($user->alm_jln_domisili != '')
                                                     {{ $user->alm_jln_domisili }}
                                                 @else
-                                                    <button type="button" class="btn btn-outline-warning btn-sm me-1 btnEdit" data-bs-toggle="modal" data-bs-target="#edit_user" data-userid="{{ $user->id }}" title="Edit user data">
-                                                        <i class="fa-solid fa-triangle-exclamation me-2"></i>Data belum terisi
-                                                    </button>
+                                                    <i class="fa-solid fa-triangle-exclamation me-2"></i>Data belum terisi
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="" class="me-2 btnInfo" data-bs-toggle="modal" data-bs-target="#view_role" data-roleinfo="{{ $user->user_role->desc }}" data-rolename="{{ $user->user_role->name }}" title="Role detail">
+                                                <a href="" class="me-2 btnRoleInfo" data-bs-toggle="modal" data-bs-target="#roleInfo" data-roleinfo="{{ $user->user_role->desc }}" data-rolename="{{ $user->user_role->name }}" title="Role detail">
                                                     {{ $user->user_role->name }}
                                                 </a>
                                             </td>
                                             <td class="text-center">
-                                                <button class="btn btn-outline-primary btn-sm me-1 btnInfo" data-bs-toggle="modal" data-bs-target="#view_role" data-userid="{{ $user->id }}" title="User details">
+                                                <button class="btn btn-outline-primary btn-sm me-1 btnInfo" data-bs-toggle="modal" data-bs-target="#" data-userid="{{ $user->id }}" title="User details">
                                                     <i class="fa-solid fa-eye"></i>
                                                 </button>
-                                                <button type="button" class="btn btn-outline-warning btn-sm me-1 btnEdit" data-bs-toggle="modal" data-bs-target="#edit_user" data-userid="{{ $user->id }}" title="Edit user data">
+                                                <button type="button" class="btn btn-outline-warning btn-sm me-1 btnEdit" data-bs-toggle="modal" data-bs-target="#passwordConfirm" data-userid="{{ $user->id }}" title="Edit user data">
                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                 </button>
                                                 <button class="btn btn-outline-danger btn-sm me-1 btnDelete" data-bs-toggle="modal" data-bs-target="#delete_user" data-roleinfo="{{ $user->role_desc }}" data-rolename="{{ $user->role_name }}" title="Delete">
@@ -85,16 +90,16 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                            </table>{{-- /.datatable --}}
+                            </table>{{-- Datatable -- end --}}
                         </div>
                     </div>
-                </div><!-- [ List ] end -->
-            </div>
+                </div>{{-- List -- end--}}
+            </div>{{-- Main Content -- end --}}
         </div>
     </div>
 
-    {{-- Modal View Role --}}
-    <div class="modal fade" id="view_role" tabindex="-1"  aria-hidden="true">
+    {{-- Modal Role Info --}}
+    <div class="modal fade" id="roleInfo" tabindex="-1"  aria-hidden="true">
         <div class="modal-dialog fluid">
             <div class="modal-content">
                 <div class="modal-header">
@@ -112,8 +117,8 @@
         </div>
     </div>{{-- /.modal view role --}}
 
-    {{-- Modal Konfirmasi Edit --}}
-    <div class="modal fade" id="edit_user" tabindex="-1" aria-hidden="true">
+    {{-- Modal Konfirmasi Edit -- start --}}
+    <div class="modal fade" id="passwordConfirm" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -121,7 +126,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post" id="formConfirmEdit">
+                    <form action="" method="post" id="formConfirm">
                         @method('post')
                         @csrf
                         <div class="row">
@@ -150,38 +155,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    {{-- /.modal edit role --}}
+    </div>{{-- Modal Konfirmasi Edit -- end --}}
 
-    {{-- Modal Edit Role --}}
-    {{-- <div class="modal fade" id="edit_userrole" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" >Edit User Role</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="" method="post" id="formEditRole">
-                        @method('patch')
-                        @csrf
-                        <div class="mb-5 px-3">
-                            <label for="user_role" class="form-label fw-bold">Pilih User Role:</label>
-                            <select class="form-select" id="user_role" name="user_role">
-                                @foreach ($data['roles'] as $role)
-                                    <option value="{{ $role->id }}" type="number">{{ $role->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="px-3 text-end">
-                            <button type="submit" class="btn btn-outline-primary btn-sm me-auto">Update</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-    {{-- /.modal edit role --}}
 @endsection
 
 @section('footer')
@@ -215,8 +190,8 @@
                 scrollX: true // horizntal scrolling
             });
 
-            // Ketika button class="btnInfo" di-click
-            $('.btnInfo').on('click', function(){
+            // Ketika button class="btnRoleInfo" di-click
+            $('.btnRoleInfo').on('click', function(){
                 let roleName = $(this).data('rolename');
                 roleName = roleName.charAt(0).toUpperCase() + roleName.slice(1); // code javascript untuk mengubah huruf pertama suatu kata menjadi huruf kapital
                 let roleInfo = $(this).data('roleinfo');
@@ -233,11 +208,11 @@
                 })
             });
 
-            // Ketika button class="btnEdit" di-click
+            // Ketika button .btnEdit di-click
             $('.btnEdit').on('click', function(){
                 let user_id = $(this).data('userid');
                 
-                $('#formConfirmEdit').attr('action', '/userslist/' + user_id + '/edit');
+                $('#formConfirm').attr('action', '/userslist/' + user_id + '/edit');
             });
 
             // preview password

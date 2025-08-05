@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\APIController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -45,3 +46,5 @@ Route::get('/checkkecamatan/{kota}', [APIController::class, 'checkKecamatan']);
 Route::get('/getkecamatan/{kota}', [APIController::class, 'getKecamatan']);
 Route::get('/checkkelurahan/{kecamatan}', [APIController::class, 'checkKelurahan']);
 Route::get('/getkelurahan/{kecamatan}', [APIController::class, 'getKelurahan']);
+
+

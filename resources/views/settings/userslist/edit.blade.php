@@ -148,7 +148,7 @@
                                         <div class="row mb-0">
                                             <div class="col-md-12">
                                                 <strong><i class="fas fa-map-marked me-2"></i>Alamat Jalan Asal</strong>
-                                                <textarea class="form-control form-control-sm" id="alm_jl_asal" name="alm_jl_asal" rows="4">{{ $data['user']->alm_jl_asal, old('alm_jl_asal') }}</textarea>
+                                                <textarea class="form-control form-control-sm" id="alm_jl_asal" name="alm_jl_asal" rows="4">{{ $data['user']->alm_jln_asal, old('alm_jln_asal') }}</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -217,7 +217,7 @@
                                         <div class="row mb-0">
                                             <div class="col-md-12">
                                                 <strong><i class="fas fa-map-marked me-2"></i>Alamat Jalan Domisili</strong>
-                                                <textarea class="form-control form-control-sm" id="alm_jl_domisili" name="alm_jl_domisili" rows="4">{{ $data['user']->alm_jl_domisili, old('alm_jl_domisili') }}</textarea>
+                                                <textarea class="form-control form-control-sm" id="alm_jl_domisili" name="alm_jl_domisili" rows="4">{{ $data['user']->alm_jln_domisili, old('alm_jln_domisili') }}</textarea>
                                             </div>
                                         </div>
 
@@ -241,7 +241,7 @@
                                             <img type="button" class="profile-user-img rounded-circle img-preview mt-2 mb-3" width="130px" height="130px" data-bs-toggle="modal" data-bs-target="#zoomPhoto" title="Zoom" src="{{ asset('storage/usersdata/'.$data['user']->email.'/images/'.$data['user']->photo) }}">
                                         @endif
                                         <div class="form-group text-center">
-                                            <input class="form-control form-control-sm" id="photo" name="photo" type="file" title="Edit photo">
+                                            <input class="form-control form-control-sm" id="photo" name="photo" type="file" title="Edit photo" value={{ $data['user']->photo }}>                               
                                         </div>
                                     </div>
                                 </div>
@@ -264,7 +264,6 @@
             </form>
         </div>
     </div>
-
 
     <!-- Modal Zoom Photo Profile-->
     <div class="modal fade" id="zoomPhoto" tabindex="-1" aria-hidden="true">
