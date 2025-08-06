@@ -144,16 +144,13 @@ class UsersController extends Controller
         // Jika terdapat file foto terlampir 
         if ($photo != null) {
 
-            // Hapus photo profil sebelumnya jika ada
+            // Mencegah proses hapus file error ketika file photo tidak ada
             if ($user->photo != '') {
                 Storage::disk('public')->delete('usersdata/'.$user->email.'/images/'.$user->photo);
             }
 
             // Membuat nama photo dengan menggabung uuid dan ekstensi imagenya
             $photoName = Str::uuid().'.'.$photo->getClientOriginalExtension(); 
-
-            // Proses simpan file image sesuai email user
-            Storage::disk('public')->putFileAs('usersdata/'.$request['email'].'/images', $photo, $photoName); 
 
             $validatedData['photo'] = $photoName;
 
@@ -166,7 +163,6 @@ class UsersController extends Controller
             $validatedData['photo'] = $photoName;
         
         } else{
-            
             $validatedData['photo'] = $user->photo;
 
         }

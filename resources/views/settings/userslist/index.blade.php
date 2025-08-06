@@ -26,8 +26,8 @@
                         <h5 class="mb-0">Table Users</h5>
                         <ul class="nav nav-pills justify-content-end mb-0" id="chart-tab-tab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="alm-asal-tab" data-bs-toggle="pill" data-bs-target="#alm-asal" type="button" role="tab" aria-controls="alm-asal" aria-selected="true">
-                                    Asal
+                                <button class=" btn btn-outline-success btn-sm" id="alm-asal-tab" data-bs-toggle="modal" data-bs-target="#alm-asal" type="button" role="tab" aria-controls="alm-asal" aria-selected="true">
+                                    <i class="fa-solid fa-user-plus"></i>
                                 </button>
                             </li>
                         </ul>

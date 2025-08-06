@@ -32,6 +32,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('aut
 
 // Users List
 Route::get('/userslist', [UsersController::class, 'index'])->name('userslist')->middleware('auth');
+// Route::post('/userslist/create', [UsersController::class, 'create']);
 Route::post('/userslist/{user}/edit', [UsersController::class, 'edit']); 
 Route::patch('/userslist/{user}/edit', [UsersController::class, 'update']); 
 
